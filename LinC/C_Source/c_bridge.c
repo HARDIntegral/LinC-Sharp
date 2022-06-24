@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-int main(int argc, char** argv) {
-    printf("Cross the bridge!");
+void bridge_init() {
+    printf("Cross the bridge!\n");
 
-    return 0;
+    return;
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/integral/Dev/LinC-Sharp/LinC/LinC.csproj": {}
+    "/home/integral/Dev/LinCS/LinC/LinC.csproj": {}
   },
   "projects": {
-    "/home/integral/Dev/LinC-Sharp/LinC/LinC.csproj": {
+    "/home/integral/Dev/LinCS/LinC/LinC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/integral/Dev/LinC-Sharp/LinC/LinC.csproj",
+        "projectUniqueName": "/home/integral/Dev/LinCS/LinC/LinC.csproj",
         "projectName": "LinC",
-        "projectPath": "/home/integral/Dev/LinC-Sharp/LinC/LinC.csproj",
+        "projectPath": "/home/integral/Dev/LinCS/LinC/LinC.csproj",
         "packagesPath": "/home/integral/.nuget/packages/",
-        "outputPath": "/home/integral/Dev/LinC-Sharp/LinC/obj/",
+        "outputPath": "/home/integral/Dev/LinCS/LinC/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/integral/.nuget/NuGet/NuGet.Config"
@@ -47,18 +47,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.2, 6.0.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/integral/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
         }
       }
     }

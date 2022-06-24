@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cVVFdd9IJzJmUXyUSIuOAGYjD6rZ2CN4mNSVVg6sFWJAFcaO3Hg6nNLD12aW10lSvphLA0X+CBJL5KixG03BDg==",
+  "dgSpecHash": "TkMPZ4hk7MizOCoYcxoKm9kjjQsDG+N2ray/qXCbswB6qlsyOPCmVKfs/Rkk9x5ula3TYorTxFj2FMU+fEZejg==",
   "success": true,
-  "projectFilePath": "/home/integral/Dev/LinC-Sharp/LinC/LinC.csproj",
-  "expectedPackageFiles": [
-    "/home/integral/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.2/microsoft.aspnetcore.app.ref.6.0.2.nupkg.sha512"
-  ],
+  "projectFilePath": "/home/integral/Dev/LinCS/LinC/LinC.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
