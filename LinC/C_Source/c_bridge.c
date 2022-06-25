@@ -5,3 +5,7 @@ void bridge_init() {
 
     return;
 }
+
+void receive_data(void *data, int type) {
+    
+}
