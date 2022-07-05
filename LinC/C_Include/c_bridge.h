@@ -4,6 +4,7 @@ typedef struct vars {
     void** vars;
 } vars_t;
 #pragma pack()
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -16,8 +17,9 @@ extern "C" {
 #else
 #  define MODULE_API
 #endif
-MODULE_API void bridge_init();
+MODULE_API vars_t* bridge_init();
 MODULE_API void receive_data(void* data, int type);
+MODULE_API void send_data(void* data, int type);
 #ifdef __cplusplus
 }
 #endif
