@@ -17,7 +17,7 @@ extern "C" {
 #  define MODULE_API
 #endif
 MODULE_API void bridge_init();
-MODULE_API void receive_data(void* data);
+MODULE_API void receive_data(void* data, int type);
 #ifdef __cplusplus
 }
 #endif

@@ -16,8 +16,10 @@ namespace LinC {
         public static extern unsafe void receive_data(void* data, int type);
 
         // Wrapper methods
-        static void send<T>(ref T data) {
-            receive_data(data);
+        static unsafe void send<T>(ref T data) where T: unmanaged {
+            fixed (T* data_ref = &data) {
+                receive_data(data_ref, 1);
+            };
         }
 
         static void Main(string[] args) {

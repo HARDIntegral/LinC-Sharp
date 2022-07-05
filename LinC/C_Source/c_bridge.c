@@ -6,6 +6,6 @@ void bridge_init() {
     return;
 }
 
-void receive_data(void *data, int type) {
-    
+void receive_data(void* data, int type) {
+    printf("%d\n", *(int*)data);
 }
