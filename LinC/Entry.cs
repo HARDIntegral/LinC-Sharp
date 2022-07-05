@@ -48,6 +48,7 @@ namespace LinC {
         
         static void Main(string[] args) {
             Console.WriteLine("Hello, world!");
+            vars_t VarsList = InitBridge();
 
             int test = 5;
             SendVar(ref test, Types.INTEGER);
