@@ -22,16 +22,17 @@ namespace LinC {
 
     class Entry {
         [StructLayout(LayoutKind.Sequential, Pack=1)]
-        unsafe public readonly struct vars_t {
-            public readonly int num_vars;
-            public readonly unsafe void** vars;
+        unsafe public struct vars_t {
+            public int num_vars;
+            public unsafe void** vars;
+            public unsafe int* types;
         };
 
         // Functions are named in the context of the C bridge
         [DllImport(@"./c_bridge.so")]
         public static extern unsafe vars_t* bridge_init();
         [DllImport(@"./c_bridge.so")]
-        public static extern unsafe void receive_data(void* data, int type);
+        public static extern unsafe void receive_data(void* data, int type, vars_t* vars_list);
 
         // Wrapper methods
         static unsafe ref vars_t InitBridge() {
@@ -40,9 +41,11 @@ namespace LinC {
             return ref Unsafe.AsRef<vars_t>(new_vars_list);
         }
 
-        static unsafe void SendVar<T>(ref T data, int type) where T: unmanaged {
+        static unsafe void SendVar<T>(ref T data, int type, ref vars_t var_list) where T: unmanaged {
             fixed (T* data_ref = &data) {
-                receive_data(data_ref, 1);
+                fixed (vars_t* var_list_ref = &var_list) {
+                    receive_data(data_ref, 1, var_list_ref);
+                };
             };
         }
         
@@ -51,7 +54,7 @@ namespace LinC {
             vars_t VarsList = InitBridge();
 
             int test = 5;
-            SendVar(ref test, Types.INTEGER);
+            SendVar(ref test, Types.INTEGER, ref VarsList);
         }
     } 
 }
