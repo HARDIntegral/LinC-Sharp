@@ -17,5 +17,4 @@ vars_t* bridge_init() {
 // TODO: finish writing the function so that I push vars to a stack
 void receive_data(void* data, int type, vars_t* vars_list) {
     printf("%d\n", *(int*)data);
-
 }
