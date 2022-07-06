@@ -26,6 +26,7 @@ namespace LinC {
             public int num_vars;
             public unsafe void** vars;
             public unsafe int* types;
+            readonly unsafe int size;
         };
 
         // Functions are named in the context of the C bridge
@@ -37,7 +38,6 @@ namespace LinC {
         // Wrapper methods
         static unsafe ref vars_t InitBridge() {
             vars_t* new_vars_list = bridge_init();
-            Console.WriteLine(new_vars_list->num_vars);
             return ref Unsafe.AsRef<vars_t>(new_vars_list);
         }
 
@@ -49,12 +49,22 @@ namespace LinC {
             };
         }
         
+        // TODO: Implement this method
+        /*
+        static unsafe T ReadVar<T>(ref vars_t var_list, int var_id) {
+
+        }
+        */
+        
         static void Main(string[] args) {
-            Console.WriteLine("Hello, world!");
             vars_t VarsList = InitBridge();
 
             int test = 5;
             SendVar(ref test, Types.INTEGER, ref VarsList);
-        }
-    } 
+            unsafe {
+                Console.Write("C# reading C initialized memory: ");
+                Console.WriteLine(*(int*)VarsList.vars[0]);            
+            }
+        } 
+    }
 }

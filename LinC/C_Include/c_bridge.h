@@ -1,8 +1,12 @@
+#ifndef C_BRIDGE_H
+#define C_BRIDGE_H
+
 #pragma pack(1)
 typedef struct vars {
     int num_vars;
     void** vars;
     int* types;
+    int size;
 } vars_t;
 #pragma pack()
 
@@ -24,3 +28,5 @@ MODULE_API void send_data(void* data, int type);
 #ifdef __cplusplus
 }
 #endif
+
+#endif  /* C_BRIDGE_H */
