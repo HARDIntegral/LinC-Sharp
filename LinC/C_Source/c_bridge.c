@@ -15,7 +15,7 @@ vars_t* bridge_init() {
 }
 
 void receive_data(void* data, int type, vars_t* vars_list) {
-    printf("Variable given to C from C#: %d\n", *(int*)data);
+    printf("Variable given to C from C#: %d\n", ++*(int*)data);
     if (vars_list->num_vars >= vars_list->size) {
         // TODO: double the list size somehow
     }

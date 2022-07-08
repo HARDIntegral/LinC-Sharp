@@ -49,22 +49,12 @@ namespace LinC {
             };
         }
         
-        // TODO: Implement this method
-        /*
-        static unsafe T ReadVar<T>(ref vars_t var_list, int var_id) {
-
-        }
-        */
-        
         static void Main(string[] args) {
             vars_t VarsList = InitBridge();
 
             int test = 5;
             SendVar(ref test, Types.INTEGER, ref VarsList);
-            unsafe {
-                Console.Write("C# reading C initialized memory: ");
-                Console.WriteLine(*(int*)VarsList.vars[0]);            
-            }
+            Console.WriteLine("C# reading memory manipulated by C: "+test);
         } 
     }
 }
