@@ -1,6 +1,7 @@
 #	Configuaration
 CC := gcc
 Extension := .c
+ExtInclude := /usr/include/lua5.4
 
 #	C Source Code
 Source := C_Source
@@ -34,7 +35,7 @@ DependenciesFlags = -MMD -MF $(@:.o=.d)
 #	Build Shared Library
 build: $(Objects)
 	@echo [INFO] Creating Shared Library [$(Target)] ...
-	@$(CC) -fPIC -shared -o $(LibraryPath) $^
+	@$(CC) -fPIC -shared -o $(LibraryPath) $^ -ldl -lm
 	@echo [INFO] [$(Library)] Created!
 
 $(Build)%.o: $(Source)%$(Extension)
@@ -43,7 +44,8 @@ $(Build)%.o: $(Source)%$(Extension)
 	@$(CC) -fPIC $< -c -o $@ 	\
 		$(Flags) 				\
 		$(DependenciesFlags) 	\
-		-I$(Include)
+		-I$(Include)			\
+		-I$(ExtInclude)
 
 #	Reset Build Environment
 .PHONEY: clean

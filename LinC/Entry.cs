@@ -1,13 +1,3 @@
-/*
- *  Sharing variables between C and C#
- *  -   Pass pointers to variables in C# to C so C can modify and use them
- *  -   Have C keep track of the variables it have been given and let C#
- *      know what variables have been given to C
- *
- *  In theory this should work
- */
-
-
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -29,7 +19,7 @@ namespace LinC {
             public unsafe int* types;
             readonly unsafe int size;
         };
-
+        
         // Functions are named in the context of the C bridge
         [DllImport(@"./c_bridge.so")]
         public static extern unsafe vars_t* bridge_init(string lua_file);
@@ -51,6 +41,11 @@ namespace LinC {
             };
         }
         
+        static void PrintErr(string Message, Exception e) {
+            Console.WriteLine(Message);
+            Console.WriteLine(e);
+        }
+
         static void Main(string[] args) {
             try {
                 vars_t VarsList = InitBridge(args[0]);
@@ -60,8 +55,10 @@ namespace LinC {
                 SendVar(ref test1, Types.INTEGER, ref VarsList);
                 SendVar(ref test2, Types.INTEGER, ref VarsList);
             } catch (IndexOutOfRangeException e) {
-                Console.WriteLine("Error: Must pass path to a Lua file as an CLI arg");
-            } 
+                PrintErr("Error: Must pass path to a Lua file as an CLI arg", e);
+            } catch (System.DllNotFoundException e) {
+                PrintErr("Error: C shared library not found in current directory", e);
+            }
         }
     }
 }
