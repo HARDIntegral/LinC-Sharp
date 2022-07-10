@@ -5,7 +5,9 @@
 
 #define DEFAULT_NUM_VARS    4
 
-vars_t* bridge_init() {
+vars_t* bridge_init(char* lua_file) {
+    // TODO: pass the file contents to the Lua interpreter instance
+
     vars_t* vars_list = (vars_t*)malloc(sizeof(vars_t)); 
     vars_list->num_vars = 0;
     vars_list->vars = malloc(sizeof(void*)*DEFAULT_NUM_VARS);
@@ -15,9 +17,10 @@ vars_t* bridge_init() {
 }
 
 void receive_data(void* data, int type, vars_t* vars_list) {
-    printf("Variable given to C from C#: %d\n", ++*(int*)data);
     if (vars_list->num_vars >= vars_list->size) {
-        // TODO: double the list size somehow
+        vars_list->size *= 2;
+        vars_list->vars = realloc(vars_list->vars, vars_list->size);
+        vars_list->types = realloc(vars_list->types, vars_list->size);
     }
     vars_list->vars[vars_list->num_vars] = data;
     vars_list->types[vars_list->num_vars] = type;

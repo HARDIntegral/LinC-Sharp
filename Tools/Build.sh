@@ -4,5 +4,5 @@ cd ./LinC
 
 make build
 echo ""
-dotnet run
+dotnet run ../Tests/test1.lua
 

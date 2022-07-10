@@ -11,6 +11,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace LinC {
     static class Types {
@@ -31,13 +32,14 @@ namespace LinC {
 
         // Functions are named in the context of the C bridge
         [DllImport(@"./c_bridge.so")]
-        public static extern unsafe vars_t* bridge_init();
+        public static extern unsafe vars_t* bridge_init(string lua_file);
         [DllImport(@"./c_bridge.so")]
         public static extern unsafe void receive_data(void* data, int type, vars_t* vars_list);
 
         // Wrapper methods
-        static unsafe ref vars_t InitBridge() {
-            vars_t* new_vars_list = bridge_init();
+        static unsafe ref vars_t InitBridge(string LuaFilePath) {
+            string file_contents = File.ReadAllText(LuaFilePath);
+            vars_t* new_vars_list = bridge_init(file_contents);
             return ref Unsafe.AsRef<vars_t>(new_vars_list);
         }
 
@@ -50,11 +52,16 @@ namespace LinC {
         }
         
         static void Main(string[] args) {
-            vars_t VarsList = InitBridge();
+            try {
+                vars_t VarsList = InitBridge(args[0]);
 
-            int test = 5;
-            SendVar(ref test, Types.INTEGER, ref VarsList);
-            Console.WriteLine("C# reading memory manipulated by C: "+test);
-        } 
+                int test1 = 5;
+                int test2 = 8;
+                SendVar(ref test1, Types.INTEGER, ref VarsList);
+                SendVar(ref test2, Types.INTEGER, ref VarsList);
+            } catch (IndexOutOfRangeException e) {
+                Console.WriteLine("Error: Must pass path to a Lua file as an CLI arg");
+            } 
+        }
     }
 }
