@@ -35,7 +35,7 @@ DependenciesFlags = -MMD -MF $(@:.o=.d)
 #	Build Shared Library
 build: $(Objects)
 	@echo [INFO] Creating Shared Library [$(Target)] ...
-	@$(CC) -fPIC -shared -o $(LibraryPath) $^ -ldl -lm
+	@$(CC) -fPIC -shared -o $(LibraryPath) $^ -ldl -lm -llua5.4
 	@echo [INFO] [$(Library)] Created!
 
 $(Build)%.o: $(Source)%$(Extension)

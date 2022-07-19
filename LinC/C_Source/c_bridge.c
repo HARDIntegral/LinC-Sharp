@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <malloc.h>
 #include "c_bridge.h"
+#include "l_entry.h"
 #include "types.h"
 
 #define DEFAULT_NUM_VARS    4
 
 vars_t* bridge_init(char* lua_file) {
     // TODO: pass the file contents to the Lua interpreter instance
+    lua_init(lua_file);
 
     vars_t* vars_list = (vars_t*)malloc(sizeof(vars_t)); 
     vars_list->num_vars = 0;

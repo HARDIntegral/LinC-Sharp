@@ -2,7 +2,9 @@
 
 cd ./LinC
 
-make build
-echo ""
-dotnet run ../Tests/test1.lua
-
+make $1 
+if [ $1 == "build" ]
+then
+    echo ""
+    dotnet run ../Tests/test1.lua
+fi
